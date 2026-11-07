@@ -1,8 +1,23 @@
 # VizHub
 
+> **Historical codebase (VizHub V3-era open-source core).** This repository is not the implementation currently served at [vizhub.com](https://vizhub.com/). The newer product uses the VizHub brand, while the previous hosted platform is associated with [old.vizhub.com](https://old.vizhub.com/). Historical screenshots and routes below are preserved as context, not active-product documentation.
+>
+> **Before running:** This is a multi-workspace application with a MongoDB-era development stack and authentication integrations. Do not reuse production secrets, payment data, or old deployment scripts to set up a local environment.
+
+## Repository guide
+
+- **Layout:** [`app/`](app/), [`api/`](api/), [`components/`](components/), [`entities/`](entities/), [`gateways/`](gateways/), [`interactors/`](interactors/) and [`migration/`](migration/) are part of the workspace-based platform.
+- **Verified root scripts:** `npm run dev` and `npm run build` delegate to `app/`; `npm run test` and `npm run tsc` delegate across workspaces.
+- **Install:** `npm install` at the repository root initializes the checked-in workspaces. Inspect `package.json`, development configuration and each package before starting services.
+- **Historical instructions:** Docker, local DB seeds, Auth0 callbacks and premium-plan test data described below are for a prior system; validate hostnames and nonproduction credentials separately. Do not run demo population or database changes against any shared database.
+- **Related projects:** [VizHub Cloud (legacy)](https://github.com/vizhub-studio/vizhub-cloud) and [VZCode](https://github.com/vizhub-studio/vzcode).
+
+## Historical interface tour and setup
+
+
 This repository contains the open source core of the VizHub platform.
 
-Tour of the app:
+The following screenshots and paths document the earlier interface:
 
 - https://vizhub.com/explore - Explore user generated content
   ![image](https://github.com/user-attachments/assets/297ac688-88ab-42f1-b04c-47e66ac9d153)
@@ -10,7 +25,7 @@ Tour of the app:
   ![image](https://github.com/user-attachments/assets/17a0794d-3f05-46b1-bd4e-e2076a055c39)
 - https://vizhub.com/curran/circles-with-d3 - An example Viz Page
   ![image](https://github.com/user-attachments/assets/5bacc288-c407-4a64-8d50-ec0895a62ee6)
-- https://vizhub.com/curran/circles-with-d3?edit=files&file=index.js - The Viz Page with editor open ([VZCode](https://github.com/vizhub-core/vzcode)), which lets you edit code in the browser
+- https://vizhub.com/curran/circles-with-d3?edit=files&file=index.js - The Viz Page with editor open ([VZCode](https://github.com/vizhub-studio/vzcode)), which lets you edit code in the browser
   ![image](https://github.com/user-attachments/assets/033f129e-cd6f-4dec-92f8-e5359d8875cf)
 
 All code changes are synchronized in real time to remote collaborators. You can use "interactive widgets" using Alt+drag on numbers for truly instant feedback (~60FPS hot reloading for simple examples).
@@ -22,7 +37,7 @@ All code changes are synchronized in real time to remote collaborators. You can 
 If all you need to do is change UI, that is located in the `components` package:
 
 ```
-cd vizhub3
+cd vizhub
 npm install
 cd components
 npm run dev
